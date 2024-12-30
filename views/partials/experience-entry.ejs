@@ -1,12 +1,16 @@
-<div class="grid grid-cols-[100px_1fr] gap-6 mb-8 experience-entry" data-id="<%= experience.companyName %>">
-    <div class="relative w-20 h-20">
+<div class="flex gap-6 mb-8 experience-entry" data-id="<%= experience.companyName %>">
+    <div class="relative w-20 h-20 flex-shrink-0">
         <img src="<%= experience.companyLogo %>" alt="<%= experience.companyName %> logo" class="object-contain w-full h-full">
     </div>
-    <div>
+    <div class="flex-grow">
         <div class="flex justify-between items-start mb-2">
-            <h3 class="text-xl <%= !experience.endDate ? 'font-bold' : '' %>">
-                <%= experience.companyName %>
-            </h3>
+            <div>
+                <h3 class="text-xl <%= !experience.endDate ? 'font-bold' : '' %>">
+                    <%= experience.companyName %>
+                </h3>
+                <h4 class="font-medium"><%= experience.title %></h4>
+                <p class="text-sm text-gray-600"><%= experience.location %></p>
+            </div>
             <span class="text-sm text-gray-600">
                 <%= new Date(experience.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %>
                 -
@@ -15,10 +19,6 @@
                     : 'Present'
                 %>
             </span>
-        </div>
-        <div class="mb-2">
-            <h4 class="font-medium"><%= experience.title %></h4>
-            <p class="text-sm text-gray-600"><%= experience.location %></p>
         </div>
         <div class="flex gap-2 mb-3">
             <% experience.categories.forEach(category => { %>
@@ -31,7 +31,7 @@
             <%= experience.description %>
         </p>
         <p class="text-sm leading-relaxed mt-2 text-gray-800 long-description hidden">
-            <%= experience.longDescription %>
+            <%- experience.longDescription %>
         </p>
     </div>
 </div>
