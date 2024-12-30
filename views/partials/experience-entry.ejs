@@ -1,4 +1,4 @@
-<div class="grid grid-cols-[100px_1fr] gap-6 mb-8">
+<div class="grid grid-cols-[100px_1fr] gap-6 mb-8 experience-entry" data-id="<%= experience.companyName %>">
     <div class="relative w-20 h-20">
         <img src="<%= experience.companyLogo %>" alt="<%= experience.companyName %> logo" class="object-contain w-full h-full">
     </div>
@@ -27,10 +27,10 @@
                 </span>
             <% }); %>
         </div>
-        <p class="text-sm leading-relaxed">
+        <p class="text-sm leading-relaxed short-description">
             <%= experience.description %>
         </p>
-        <p class="text-sm leading-relaxed mt-2 text-gray-600 hidden hover:block">
+        <p class="text-sm leading-relaxed mt-2 text-gray-800 long-description hidden">
             <%= experience.longDescription %>
         </p>
     </div>

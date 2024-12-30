@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-white">
     <div class="max-w-4xl mx-auto py-12 px-4">
         <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
             <%- include('partials/profile-header', { user: userInfo }) %>
@@ -21,6 +21,22 @@
     </div>
     <script>
         lucide.createIcons();
+
+        // Add hover effect for experience entries
+        document.querySelectorAll('.experience-entry').forEach(entry => {
+            const shortDesc = entry.querySelector('.short-description');
+            const longDesc = entry.querySelector('.long-description');
+
+            entry.addEventListener('mouseenter', () => {
+                shortDesc.classList.add('hidden');
+                longDesc.classList.remove('hidden');
+            });
+
+            entry.addEventListener('mouseleave', () => {
+                shortDesc.classList.remove('hidden');
+                longDesc.classList.add('hidden');
+            });
+        });
     </script>
 </body>
 </html>

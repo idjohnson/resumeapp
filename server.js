@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
   res.render('index', { userInfo, experiences });
 });
 
+// Serve static files (including images)
+app.use(express.static(path.join(__dirname, 'public')));  // Existing line for other static assets
+app.use('/images', express.static(path.join(__dirname, 'images'))); // New line to serve images
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

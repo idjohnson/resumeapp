@@ -1,14 +1,14 @@
 {
-    "firstName": "John",
-    "lastName": "Doe",
-    "title": "Senior Software Engineer",
-    "email": "john.doe@example.com",
-    "phone": "+1 (555) 123-4567",
-    "address": "123 Tech Lane, San Francisco, CA 94105",
+    "firstName": "Isaac",
+    "lastName": "Johnson",
+    "title": "Cloud Solutions Architect",
+    "email": "isaac@freshbrewed.science",
+    "phone": "+1 (612) 555-5555",
+    "address": "1234 Schooner Circle, Woodbury MN 55125",
     "social": {
-      "mastodon": "@johndoe@mastodon.social",
-      "bluesky": "@johndoe.bsky.social"
+      "mastodon": "@ijohnson@noc.social",
+      "bluesky": "@isaacj.bsky.social"
     },
-    "photo": "/images/profile.jpg"
+    "photo": "/images/profile.png"
   }
   
