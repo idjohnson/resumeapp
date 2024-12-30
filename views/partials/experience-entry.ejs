@@ -1,0 +1,38 @@
+<div class="grid grid-cols-[100px_1fr] gap-6 mb-8">
+    <div class="relative w-20 h-20">
+        <img src="<%= experience.companyLogo %>" alt="<%= experience.companyName %> logo" class="object-contain w-full h-full">
+    </div>
+    <div>
+        <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl <%= !experience.endDate ? 'font-bold' : '' %>">
+                <%= experience.companyName %>
+            </h3>
+            <span class="text-sm text-gray-600">
+                <%= new Date(experience.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %>
+                -
+                <%= experience.endDate 
+                    ? new Date(experience.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+                    : 'Present'
+                %>
+            </span>
+        </div>
+        <div class="mb-2">
+            <h4 class="font-medium"><%= experience.title %></h4>
+            <p class="text-sm text-gray-600"><%= experience.location %></p>
+        </div>
+        <div class="flex gap-2 mb-3">
+            <% experience.categories.forEach(category => { %>
+                <span class="px-2 py-1 text-xs rounded-full bg-gray-200">
+                    <%= category %>
+                </span>
+            <% }); %>
+        </div>
+        <p class="text-sm leading-relaxed">
+            <%= experience.description %>
+        </p>
+        <p class="text-sm leading-relaxed mt-2 text-gray-600 hidden hover:block">
+            <%= experience.longDescription %>
+        </p>
+    </div>
+</div>
+
