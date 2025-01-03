@@ -12,7 +12,14 @@ COPY views ./views
 
 COPY data_json ./data_json
 
-# Install serve or a similar tool to serve static content.  Nginx could also be used.
-RUN npm install -g serve
+# Install dependencies *inside* the container
+RUN npm install
 
-CMD ["serve", "-s", "start"]
+# Copy the rest of your application code
+COPY . .
+
+# Expose the port your app listens on
+EXPOSE 3030
+
+# Define the command to run your app (as before)
+CMD ["/bin/sh", "-c", "PORT=3030 npm start"]

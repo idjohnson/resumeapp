@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resumeapp-deployment
+spec:
+  replicas: 1 # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: resumeapp
+  template:
+    metadata:
+      labels:
+        app: resumeapp
+    spec:
+      containers:
+      - name: resumeapp-container
+        image: ghcr.io/idjohnson/resume:47d02a7b4e98e0324b91a788bd7edde8803d0f7b
+        ports:
+        - containerPort: 3030
+        env:
+        - name: PORT
+          value: "3030" # Explicitly set the PORT environment variable
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resumeapp-service
+spec:
+  selector:
+    app: resumeapp
+  ports:
+  - protocol: TCP
+    port: 80 # External port
+    targetPort: 3030 # Internal port exposed by the container
+  type: ClusterIP
+
+
+
