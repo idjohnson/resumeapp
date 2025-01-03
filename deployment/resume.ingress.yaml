@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azuredns-tpkpw
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.org/websocket-services: resumeapp-service
+  name: resumeappingress
+  namespace: default
+spec:
+  rules:
+  - host: resume.tpk.pw
+    http:
+      paths:
+      - backend:
+          service:
+            name: resumeapp-service
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - resume.tpk.pw
+    secretName: myresumeapp-tls

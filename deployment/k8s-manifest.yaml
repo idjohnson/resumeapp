@@ -1,3 +1,49 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resume-data
+data:
+  experiences.json: |
+    [  
+      {
+        "companyName": "Wellsky",
+        "companyLogo": "/images/wellsky.jpeg",
+        "location": "Kansas City, KS",
+        "startDate": "2022-01",
+        "title": "Principal SRE Architect",
+        "categories": [ "SRE", "Architect", "GCP", "Kubernetes" ],
+        "description": "Leading multiple BU verticals on SRE Architecture and Cloud Migration",
+        "longDescription": "Principal Architect over SRE Squad (3 Scrum Teams) for Wellsky Home Health and Hospice Product lines. Focus on Azure DevOps, On-prem deployments, Ansible, Artifactory, NewRelic Monitoring (from Sumo).  Pivot to Focus on GCP migration (On-prem/AWS). <br/>March 2022 - Oct 2022:  Interim Software Director/Delivery Manager over Feature Squad (3 Scrum Team; US, India, and Argentina) (in addition to Architect role)<br/>March 2022 - Wellsky Home Culture Award for High Performance<br/>Handle high priority Subpoena(s) (Grand Jury request(s))<br/>Point person on full GCP Migration for Hospice BU, key resource for Home Health<br/>Part of Diversity and Inclusion working group (DEI)<br/>Point on SkyDev Studio (Learning Series) for DevOps and TechTalks (two different Studio series)<br/>Presented multiple 15m Lighting Talk (mgmt; PunchUp, LiftDown, In Defence of Open-Source), 2 Hour Azure DevOps Workshop at DevDays 2023 internal conference, 45m talk on Scalable Tracing with OpenTelemetry, NewRelic and Dotnet<br/>Help Azure-based BUs with updates (e.g. AKS)<br/>Part of Personal Care SRE, Datadog Monitor, New Relic SME, Ansible AWX configurations."
+        },
+      {
+        "companyName": "CHRobinson",
+        "companyLogo": "/images/chrobinson.png",
+        "location": "Eagen, MN",
+        "startDate": "2021-07",
+        "endDate": "2022-01",
+        "title": "Principal DevOps Engineer (Cloud Solutions Architect/Devops Architect)",
+        "categories": ["Ansible", "Artifactory", "Azure"],
+        "description": "Focus on North Europe Migration Effort with Artifactory Backups and Restore. Ansible Playbook support. ",
+        "longDescription": "Focus on North Europe Migration Effort with Artifactory Backups and Restore. Ansible Playbook support. Support for Software Teams primarily in Jenkins using Octopus. Ansible Playbooks for Operational Updates (Timezones, etc).     Created and presented a course on Kubernetes to EU and US teams.  Worked on APM and Logging suite evaluations for Enterprise Architects. Supported end users in Kubernetes.  Engaged and worked with Cloud Team on Terraform updates (Atlantis)."
+        }
+    ]
+  user.json: |
+    {
+      "firstName": "Isaac",
+      "lastName": "Johnson",
+      "title": "Cloud Solutions Architect",
+      "email": "isaac@freshbrewed.science",
+      "phone": "+1 (612) 555-5555",
+      "address": "1234 Schooner Circle, Woodbury MN 55125",
+      "social": {
+        "mastodon": "@ijohnson@noc.social",
+        "bluesky": "@isaacj.bsky.social"
+      },
+      "photo": "/images/profile.png"
+    }
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,12 +60,19 @@ spec:
     spec:
       containers:
       - name: resumeapp-container
-        image: ghcr.io/idjohnson/resume:47d02a7b4e98e0324b91a788bd7edde8803d0f7b
+        image: ghcr.io/idjohnson/resume:ff2f9399e4d3563b496053d1e83199cbaac1d8a1
         ports:
         - containerPort: 3030
         env:
         - name: PORT
           value: "3030" # Explicitly set the PORT environment variable
+        volumeMounts:
+        - name: resume-data-volume
+          mountPath: /app/data_json  # Mount path inside the container
+      volumes:
+      - name: resume-data-volume
+        configMap:
+          name: resume-data      # Name of your ConfigMap
 
 ---
 apiVersion: v1
@@ -34,6 +87,4 @@ spec:
     port: 80 # External port
     targetPort: 3030 # Internal port exposed by the container
   type: ClusterIP
-
-
 

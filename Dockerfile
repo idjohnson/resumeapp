@@ -10,7 +10,7 @@ COPY views ./views
 
 # I'll make this dynamic next
 
-COPY data_json ./data_json
+#COPY data_json ./data_json
 
 # Install dependencies *inside* the container
 RUN npm install
