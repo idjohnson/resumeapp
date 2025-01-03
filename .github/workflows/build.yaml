@@ -25,7 +25,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: ./resume # Path to your Dockerfile
+        context: ./
         push: true
         tags: ghcr.io/${{ github.repository_owner }}/resume:${{ github.sha }}
         build-args: |
